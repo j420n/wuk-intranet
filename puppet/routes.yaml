@@ -1,0 +1,11 @@
+---
+master:
+  facts:
+    cache: yaml
+  catalog:
+    cache: json
+agent:
+  facts:
+    cache: yaml
+  catalog:
+    cache: json
