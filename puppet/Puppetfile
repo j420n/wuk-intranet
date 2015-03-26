@@ -9,8 +9,7 @@ mod 'SilexConsulting/beluga',
 mod 'SilexConsulting/boolean',
     :git => 'https://github.com/SilexConsulting/puppet-boolean.git'
 
-mod 'SilexConsulting/apache',
-    :git => 'https://github.com/SilexConsulting/puppetlabs-apache.git'
+mod 'puppetlabs-apache'
 
 mod 'SilexConsulting/concat',
     :git => 'https://github.com/SilexConsulting/puppetlabs-concat.git'
@@ -65,12 +64,6 @@ mod 'SilexConsulting/orgdc',
 
 mod 'SilexConsulting/stdlib',
     :git => 'https://github.com/SilexConsulting/puppetlabs-stdlib.git'
-
-mod 'SilexConsulting/postgresql',
-    :git => 'https://github.com/SilexConsulting/puppetlabs-postgresql'
-
-mod 'SilexConsulting/redis',
-    :git => 'https://github.com/SilexConsulting/puppet-redis'
 
 mod 'SilexConsulting/referencetimeserver',
     :git => 'https://github.com/SilexConsulting/puppet-referencetimeserver.git'
