@@ -27,7 +27,7 @@ class prod_defaults {
   }
 }
 
-class dgu_users {
+class wuk_users {
   beluga::user { 'noels':
     uid => 5001,
     groups => ['admins'],
@@ -36,60 +36,25 @@ class dgu_users {
   }
 
   beluga::user {'jasonb':
-    uid => 5005,
+    uid => 5002,
     ssh_key => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCoypusMcT0LZTfvyh7DLC/xTPsOnEYS3JOSwP4PFmN5QnwQGO250kkXDQ6UttxfimJbquvZY2MN3jQbwlTwQIY8xap81v13WjxMIHmN4dYd5GVrIGz6fw7uen3N25r53MIVPjL2UiD9D6RYLPYi9D4VifyjHNvd23lHzNIBAQUBQMMD3x15dStpMQpBgxZKmTkFGtvX1sbpXPHn9JIF4WsCQJshd0KE3NpfzMZIsbjP2NNjujHeKxzbgRjR1U2cP8BWGezBk+ZIbvkAFfzqEuedR5t2tQmCEDmSnc3T+JfRl0qoyZWr9y3rQqroaMF0MvgpdzfX4XfKY4UqczZcQzF',
     key_type => 'ssh-rsa'
   }
 
   beluga::user {'djotto':
-    uid     => 5018,
+    uid     => 5003,
 	groups  => ['admins'],
 	ssh_key => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCb0oQBfctaYbksZQnZp0MWIGtjJTd4o8tQGM3QJb39w31FiYFmXLo8XNLFnfZU1xr6WH2AeaaGtuPI5feemlzyDF58wHL1OSqETPQVqiSBiAz7WfiRl2Bdztu8yVvAEWWUJNDh9wncToa/dmBoMfq5K518iGoyO79NVU7FpzxCH9lSnL9bLHdC6bKXmuqUZ+lWRkTLVyUO9qt70GY58NohVJC15uUJ2tWA2TPl7PUMRvKL6TPjlosViQ8vBjFzWKO0+key8iWebz4Meu+xWJ9KDuH5ro4hSHOuIOduLARdw8DV6bnvTV4K9zC41dVIromNSj3Zwp0TQxOciC6/cg55',
 	key_type => 'ssh-rsa',
   }
 }
 
-class dgu_keys {
-
-  beluga::user::key {'jenkins_deployment':
-    user => 'co',
-    ssh_key => 'AAAAB3NzaC1yc2EAAAABIwAAAQEAyd/uQuz+TAekzlXN0BJjxjdQhhjw/ilVZrjatVwZqBc92gR0vb4GqK3N1FIxKxnQ5ITFktiJuIV3t6FLtG6kjrZWpir0su4qQaAtk3OvZy4m0yDeYyBgUewRWJ8LkRKc1jE/V4KQWfUGFnp8FAkf3Z7WWuMsrmPbyXeKxhhXAWA+twMPG/eal7GYplA+7Vs5HMeqLsneOKlOIFORoE6c5Wro/jZtd+zZtjVOusZcL4ivlaj9SjjcAV71RjQdWR/WwAmewA9DE8QSKNwCbbC4t9Wt7MMyQAFnCS7fOBn54/Pmchc71wYr5s/2/z3m6CCTmamA5tA5nbIuPjZIiaT4cw==',
-    key_type => 'ssh-rsa'
-  }
-}
-
-class dgu_groups {
+class wuk_groups {
   group {
     "admins":
     ensure  => present,
     gid     => 7000;
   }
-}
-
-class epimorphics_users {
-  beluga::user {'epimorphics':
-    groups => ['admins'],
-    uid => 6000,
-  }
-}
-
-class epimorphics_keys {
-  beluga::user::key {'dave@epimorphics.com':
-    user => 'epimorphics',
-    ssh_key => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQC42Ox+TLOfsTsb1kKybfj3WPOzrEjlfRnL8n1fl0218PLfSbpgaY7pUZZyoptfS5mpSTn3vzvmswib5nEY6wDM94PMdhZtjTIlfy6v84yoibq/Qn3PyVD72V7/lsKchuMElzLtFhPVptNu/OZ4vhkuj9k+z/PL2+RfqULUE+gQcomCYccGvdqu74/BX8QZqLkdygElksO7MSI4ohS//P73eCynqdI4cRAZf9V3CktQySesmYaFW3pdCgYhLq4XWMREcGlGw9aZ0W/uQYo9vw98MqCtThJPY/sW5ZgiTAOjtDRDXVIN45t96Zy5Y0Fbv677UOnZDdLVaoEdxIqlIuYv',
-    key_type => 'ssh-rsa',
-  }
-}
-
-class epimorphics_defaults {
-
-  class { 'beluga::facts::role':
-    stage => pre,
-    role => 'epimorphics',
-  } ->
-  class {'prod_defaults': } ->
-  class {'epimorphics_users': } ->
-  class {'epimorphics_keys': }
 }
 
 class standards_site {
