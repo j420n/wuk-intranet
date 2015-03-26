@@ -1,29 +1,44 @@
-class all_defaults{
+class wuk_defaults{
+  class {'all_defaults': }
+  class {'wuk_groups': } ->
+  class {'wuk_users': }
+}
+
+class all_defaults {
   class { 'beluga':
     stage => pre,
   }
 }
-class dgu_defaults{
-  class {'all_defaults': }
-  class {'dgu_groups': } ->
-  class {'dgu_users': } ->
-  class {'dgu_keys': }
-}
 
 class prod_defaults {
-  class {'dgu_defaults': }
+  class {'wuk_defaults': }
   class {'sudo': }
-  host {'puppet':
-    ip => '46.43.41.19'
+  host {'e02414': # Intranet LAMP 01
+    ip => '10.210.100.32'
   }
-  host {'standards':
-    ip => '46.43.41.17'
+  host {'e02415': # Intranet LAMP 02
+    ip => '10.210.100.33'
   }
-  host {'dataconverter':
-    ip => '46.43.41.16'
+  host {'e02416': # Intranet DB 01
+    ip => '10.210.73.185'
   }
-  host {'dataservice':
-    ip => '46.43.41.18'
+  host {'e02417': # Intranet DB 02
+    ip => '10.210.73.186'
+  }
+  host {'e03422': # Intranet LAMP Dev/stage
+    ip => '10.218.65.13'
+  }
+  host {'e03423': # Intranet LAMP Test 01
+    ip => '10.218.100.11'
+  }
+  host {'e03424': # Intranet LAMP Test 02
+    ip => '10.218.100.12'
+  }
+  host {'e03425': # Intranet DB Dev/Test 01
+    ip => '10.218.65.14'
+  }
+  host {'e03426': # Intranet DB Dev/Test 01
+    ip => '10.218.65.15'
   }
 }
 
@@ -37,6 +52,7 @@ class wuk_users {
 
   beluga::user {'jasonb':
     uid => 5002,
+    groups => ['admins'],
     ssh_key => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCoypusMcT0LZTfvyh7DLC/xTPsOnEYS3JOSwP4PFmN5QnwQGO250kkXDQ6UttxfimJbquvZY2MN3jQbwlTwQIY8xap81v13WjxMIHmN4dYd5GVrIGz6fw7uen3N25r53MIVPjL2UiD9D6RYLPYi9D4VifyjHNvd23lHzNIBAQUBQMMD3x15dStpMQpBgxZKmTkFGtvX1sbpXPHn9JIF4WsCQJshd0KE3NpfzMZIsbjP2NNjujHeKxzbgRjR1U2cP8BWGezBk+ZIbvkAFfzqEuedR5t2tQmCEDmSnc3T+JfRl0qoyZWr9y3rQqroaMF0MvgpdzfX4XfKY4UqczZcQzF',
     key_type => 'ssh-rsa'
   }
