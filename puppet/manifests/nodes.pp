@@ -29,9 +29,6 @@ node wuk-dev {
         rewrite_rule            => ['^/(.*) http://www.bathstore.com/__admin$2 [R,L]'],
       },
     ],
-    additional_includes         => [
-      '/usr/local/apache/conf/compression.conf',
-    ],
 
     proxy_pass                  => [
       {
@@ -44,7 +41,14 @@ node wuk-dev {
     custom_fragment             => '<Proxy http://dev.intranet.wolseley.co.uk/login/*>
 Order deny,allow
 Allow from all
-</Proxy>',
+</Proxy>
+SetOutputFilter DEFLATE
+DeflateFilterNote ratio
+SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+SetEnvIfNoCase Request_URI \.(?:exe|t?gz|zip|bz2|sit|rar)$ no-gzip dont-vary
+SetEnvIfNoCase Request_URI \.pdf$ no-gzip dont-vary
+SetEnvIfNoCase Request_URI random_image\.(?:php)$ no-gzip dont-vary
+SetEnvIfNoCase Request_URI random_supplier_image\.(?:php)$ no-gzip dont-vary',
 
     directories                 => [
       {
@@ -71,12 +75,12 @@ Allow from all
           {
             comment             => 'Everything else, send to worklog home',
             rewrite_cond        => [
-              'RewriteCond $1 download [OR]',
-              'RewriteCond $1 logs     [OR]',
-              'RewriteCond $1 report   [OR]',
-              'RewriteCond $1 users    [OR]',
-              'RewriteCond $1 review   [OR]',
-              'RewriteCond $1 index'
+              '$1 download [OR]',
+              '$1 logs     [OR]',
+              '$1 report   [OR]',
+              '$1 users    [OR]',
+              '$1 review   [OR]',
+              '$1 index'
             ],
             rewrite_rule        => '^projects/(.+)\.php(\?[a-zA-Z0-9=&%]+)?$      /worklog/index.php [R=301,L]'
           },
