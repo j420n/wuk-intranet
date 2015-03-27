@@ -10,7 +10,6 @@ node wuk-dev {
   }
   include apache::mod::rewrite
   include apache::mod::passenger
-  include apache::mod::php
 
   file { [ "/sites", "/sites/intranet", "/sites/intranet2" ]:
     ensure                      => "directory",
