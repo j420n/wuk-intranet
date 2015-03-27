@@ -35,6 +35,7 @@ then
     gem install hiera
     gem install hiera-eyaml
     gem install hiera-puppet
+    gem install librarian-puppet
 
     rm -rf /vagrant/puppet/modules/hiera-puppet
     ln -s /usr/lib/ruby/gems/1.8/gems/hiera-puppet-1.0.0/ /vagrant/puppet/modules/hiera-puppet
