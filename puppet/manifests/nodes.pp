@@ -54,7 +54,7 @@ SetEnvIfNoCase Request_URI random_supplier_image\.(?:php)$ no-gzip dont-vary',
       {
         path                    => '/sites/intranet/wuk',
         options                 => ['FollowSymLinks'],
-        php_value               => 'include_path ".:/sites/intranet/wuk/pipeline/qcodo/wwwroot/includes/:/sites/intranet/wuk/"',
+        php_values              => ['include_path ".:/sites/intranet/wuk/pipeline/qcodo/wwwroot/includes/:/sites/intranet/wuk/"'],
         rewrites                => [
           {
             comment             => 'Rewrite URLs for old worklog -> new worklog / Strip query string from projects/index.php and forward to /worklog/index.php',
@@ -131,7 +131,7 @@ SetEnvIfNoCase Request_URI random_supplier_image\.(?:php)$ no-gzip dont-vary',
       },
       {
         path                    => '/sites/intranet/wuk/cw',
-        php_value               => 'include_path "/sites/intranet/wuk/cw/includes/"'
+        php_values              => ['include_path "/sites/intranet/wuk/cw/includes/"']
       },
       {
         path                    => '/sites/intranet/wuk/leaguetables',
@@ -149,10 +149,23 @@ SetEnvIfNoCase Request_URI random_supplier_image\.(?:php)$ no-gzip dont-vary',
     port                        => '80',
     docroot                     => '/sites/intranet2',
     override                    => 'All',
-    directories                 => [{
-      path                      => '/sites/intranet2',
-      options                   => ['Indexes','FollowSymLinks','MultiViews'],
-    }],
+    php_values                  => ['max_execution_time 120'],
+    directories                 => [
+      {
+        allow_override          => ['All'],
+        path                    => '/sites/intranet2/wuk',
+        options                 => ['FollowSymLinks', '-MultiViews'],
+        php_values              => ['include_path "/sites/intranet2/wuk"', 'include_path "/sites/intranet2/pip"'],
+        php_flag                => 'zend.ze1_compatibility_mode Off',
+        custom_fragment         => 'RailsBaseURI /apps
+RailsBaseURI /qna',
+      },
+      {
+        allow_override          => ['All'],
+        options                 => ['All'],
+        path                    => '/sites/intranet2/pip',
+      },
+    ],
   }
 
   exec { 'download-php52':
