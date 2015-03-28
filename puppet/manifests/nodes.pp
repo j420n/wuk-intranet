@@ -156,9 +156,9 @@ SetEnvIfNoCase Request_URI random_supplier_image\.(?:php)$ no-gzip dont-vary',
         path                    => '/sites/intranet2/wuk',
         options                 => ['FollowSymLinks', '-MultiViews'],
         php_values              => ['include_path "/sites/intranet2/wuk"', 'include_path "/sites/intranet2/pip"'],
-        php_flag                => 'zend.ze1_compatibility_mode Off',
         custom_fragment         => 'RailsBaseURI /apps
 RailsBaseURI /qna',
+# zend.ze1_compatibility_mode Off',
       },
       {
         allow_override          => ['All'],
@@ -166,6 +166,19 @@ RailsBaseURI /qna',
         path                    => '/sites/intranet2/pip',
       },
     ],
+  }
+
+  apache::vhost { 'dev.groupintranet.wolseley.co.uk':
+    docroot                     => '/sites/intranet/group',
+    directories                 => [
+      {
+        path                    => '/sites/intranet/group',
+        options                 => ['SymLinksIfOwnerMatch'],
+        allow_override          => ['None'],
+        php_values              => ['include_path /sites/intranet/group', 'session.save_path /tmp'],
+        custom_fragment         => 'php_flag magic_quotes_gpc On',
+      }
+    ]
   }
 
   exec { 'download-php52':
