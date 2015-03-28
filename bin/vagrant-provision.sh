@@ -20,6 +20,7 @@ fi
 # Don't change config if there are already keys
 if [ ! -f /home/vagrant/.ssh/id_rsa ];
 then
+    sed -i '1s/^/nameserver 8.8.8.8\n/' /etc/resolv.conf
     yum install puppet -y
     yum install ruby -y
     yum install gcc g++ make automake autoconf curl-devel openssl-devel zlib-devel httpd-devel apr-devel apr-util-devel sqlite-devel -y
