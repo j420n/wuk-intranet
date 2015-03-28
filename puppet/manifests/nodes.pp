@@ -3,6 +3,7 @@ node default {
 }
 
 node wuk-dev {
+  include rpmbuilder
   class {'beluga::mysql_server': }
 
   class { 'apache':
