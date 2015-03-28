@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 #^syntax detection
 
-forge "https://forgeapi.puppetlabs.com"
+forge 'https://forgeapi.puppetlabs.com'
 
 mod 'SilexConsulting/beluga',
     :git => 'https://github.com/SilexConsulting/puppet-beluga.git'
@@ -98,3 +98,6 @@ mod 'SilexConsulting/rvm',
 
 #mod 'SilexConsulting/uwsgi',
 #    :git => 'https://github.com/SilexConsulting/puppet-uwsgi.git'
+
+mod 'puppetlabs-rpmbuilder',
+    :git => 'https://github.com/puppetlabs/puppetlabs-rpmbuilder.git'
