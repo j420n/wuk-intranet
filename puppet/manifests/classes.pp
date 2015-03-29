@@ -95,15 +95,15 @@ define groupintranet (
         path                    => $docroot,
         options                 => ['FollowSymLinks'],
         allow_override          => ['None'],
-#       php_values              => ["include_path \"${docroot}\"", \"session.save_path /www/session\"], TODO
-#       custom_fragment         => 'php_flag session.save_path /www/session
-#php_flag zend.ze1_compatibility_mode Off',
+        php_values              => ["include_path \"${docroot}\"", \"session.save_path /www/session\"],
+        custom_fragment         => 'php_flag session.save_path /www/session
+        php_flag zend.ze1_compatibility_mode Off',
       },
       {
         path                    => "${docroot}/vacancies",
         options                 => ['SymLinksIfOwnerMatch'],
         directoryindex          => 'index.php',
-#       custom_fragment         => 'php_flag zend.ze1_compatibility_mode On', TODO
+        custom_fragment         => 'php_flag zend.ze1_compatibility_mode On',
       }
     ],
     rewrites                    => [
@@ -301,7 +301,7 @@ SetEnvIfNoCase Request_URI random_supplier_image\\.(?:php)$ no-gzip dont-vary",
       {
         path                    => $docroot,
         options                 => ['FollowSymLinks'],
-#       php_values              => ["include_path \".:${docroot}/pipeline/qcodo/wwwroot/includes/:${docroot}/\""], TODO
+        php_values              => ["include_path \".:${docroot}/pipeline/qcodo/wwwroot/includes/:${docroot}/\""],
         rewrites                => [
           {
             comment             => 'Rewrite URLs for old worklog -> new worklog / Strip query string from projects/index.php and forward to /worklog/index.php',
@@ -378,7 +378,7 @@ SetEnvIfNoCase Request_URI random_supplier_image\\.(?:php)$ no-gzip dont-vary",
       },
       {
         path                    => "${docroot}/cw",
-#       php_values              => ["include_path \"${docroot}/cw/includes/\""] TODO
+        php_values              => ["include_path \"${docroot}/cw/includes/\""]
       },
       {
         path                    => "${docroot}/leaguetables",
@@ -400,16 +400,16 @@ define intranet2DEMO(
     port                        => '80',
     docroot                     => $docroot,
     override                    => 'All',
-#   php_values                  => ['max_execution_time 120'], TODO
+    php_values                  => ['max_execution_time 120'],
     directories                 => [
       {
         allow_override          => ['All'],
         path                    => "${docroot}/wuk",
         options                 => ['FollowSymLinks', '-MultiViews'],
-#       php_values              => ["include_path \"${docroot}/wuk\"", "include_path \"${docroot}/pip\""], TODO
+       php_values              => ["include_path \"${docroot}/wuk\"", "include_path \"${docroot}/pip\""],
         custom_fragment         => 'RailsBaseURI /apps
 RailsBaseURI /qna',
-#       zend.ze1_compatibility_mode Off', TODO
+       zend.ze1_compatibility_mode Off', 
       },
       {
         path                    => "${docroot}/pip",
