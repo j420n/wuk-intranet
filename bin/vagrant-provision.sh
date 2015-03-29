@@ -45,6 +45,9 @@ then
     ln -sf /vagrant/puppet/hiera.yaml /etc/
     ln -sf /vagrant/hieradata /etc/
 
+
+    touch  /home/vagrant/.ssh/id_rsa
+
 fi
 
 
