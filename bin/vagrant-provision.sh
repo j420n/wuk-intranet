@@ -38,6 +38,22 @@ then
     gem install hiera-puppet
     #gem install librarian-puppet
 
+    #Update puppet module dependencies using gem install librarian-puppet.
+    #sudo yum install gcc-c++ patch readline readline-devel zlib zlib-devel -y
+    #sudo yum install libyaml-devel libffi-devel openssl-devel make -y
+    #sudo yum install bzip2 autoconf automake libtool bison iconv-devel -y
+    #command curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
+    #curl -L get.rvm.io | bash -s stable
+    #source ~/.bash_profile
+    #rvm install 1.9.3
+    #rvm use 1.9.3 --default
+    #sudo yum install rubygems-devel.noarch -y
+    #sudo gem install librarian-puppet -v 1.0.3
+
+    #Puppet 2.7.6 requires ruby 1.8.7 which is no longer maintained and librarian-puppet requires x1.9.3 so
+    #rvm install ruby-1.8.7-head
+    #sudo yum install ruby-json -y
+
     rm -rf /vagrant/puppet/modules/hiera-puppet
     ln -s /usr/lib/ruby/gems/1.8/gems/hiera-puppet-1.0.0/ /vagrant/puppet/modules/hiera-puppet
     rm -rf /etc/puppet
