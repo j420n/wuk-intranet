@@ -95,7 +95,7 @@ define groupintranet (
         path                    => $docroot,
         options                 => ['FollowSymLinks'],
         allow_override          => ['None'],
-        php_values              => ["include_path \"${docroot}\"", \"session.save_path /www/session\"],
+        php_values              => ["include_path \"${docroot}\"", "session.save_path \"/www/session\""],
         custom_fragment         => 'php_flag session.save_path /www/session
         php_flag zend.ze1_compatibility_mode Off',
       },
@@ -265,7 +265,6 @@ define intranet2 (
 define intranet (
   $docroot              = '/sites/intranet/wuk',
   $serveraliases        = [],
-  $intranet2
 ) {
   apache::vhost { $name:
     serveraliases               => $serveraliases,
@@ -408,8 +407,8 @@ define intranet2DEMO(
         options                 => ['FollowSymLinks', '-MultiViews'],
        php_values              => ["include_path \"${docroot}/wuk\"", "include_path \"${docroot}/pip\""],
         custom_fragment         => 'RailsBaseURI /apps
-RailsBaseURI /qna',
-       zend.ze1_compatibility_mode Off', 
+RailsBaseURI /qna
+zend.ze1_compatibility_mode Off',
       },
       {
         path                    => "${docroot}/pip",
