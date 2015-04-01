@@ -445,21 +445,7 @@ define groupintranetv2(
 }
 
 define webnode(
-  $group_ssl_intranet_hostname      ,
-  $group_ssl_intranet_docroot       ,
-  $group_ssl_intranet_serveradmin   ,
-  $group_ssl_intranet_serveraliases ,
-  $group_intranet_hostname          ,
-  $group_intranet_docroot           ,
-  $group_intranet_serveradmin       ,
-  $group_intranet_serveraliases     ,
-  $intranet2_hostname               ,
-  $intranet2_docroot                ,
-  $intranet2_serveraliases          ,
-  $intranet_hostname                ,
-  $intranet_docroot                 ,
-  $intranet_serveraliases           ,
-
+  $prefix,
 ) {
 
   include prod_defaults
@@ -478,27 +464,27 @@ define webnode(
     ensure                      => "directory",
   }
 
-  groupintranet { "${group_ssl_intranet_hostname}":
+  groupintranet { "ssl-${prefix}groupintranet.wolseley.com":
     ssl           => false, # THIS SHOULD BE TRUE TODO
-    docroot       => "${group_ssl_intranet_docroot}",
-    serveradmin   => "${group_ssl_intranet_serveradmin}",
-    serveraliases => "${group_ssl_intranet_serveraliases}"
+    docroot       => '/sites/intranet/groupv2',
+    serveradmin   => 'it.ops@wolseley.co.uk',
+    serveraliases => ["${prefix}.groupintranet.wolseley.com"]
   }
 
-  groupintranet { "${group_intranet_hostname}":
+  groupintranet { "${prefix}groupintranet.wolseley.com":
     ssl         => false,
-    docroot     => "${group_intranet_docroot}",
-    serveradmin => "${group_intranet_serveradmin}",
+    docroot     => '/sites/intranet/groupv2',
+    serveradmin => 'web_admin_ripon@wolseley.co.uk',
   }
 
-  intranet2 { "${intranet2_hostname}" :
-    docroot       => "${intranet2_docroot}",
+  intranet2 { "${prefix}intranet2.wolseley.co.uk" :
+    docroot       => '/sites/intranet2/wuk',
     ssl           => false, # THIS SHOULD BE TRUE TODO
-    serveraliases => "${intranet2_serveraliases}",
+    serveraliases => ["${prefix}.intranet2.wolseley.com"],
   }
 
-  intranet { "${intranet_hostname}":
-    serveraliases => "${intranet_serveraliases}",
+  intranet { "${prefix}intranet.wolseley.co.uk":
+    serveraliases => ["www.${prefix}intranet.wolseley.com"],
   }
 
 }
