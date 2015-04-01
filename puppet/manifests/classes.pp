@@ -284,7 +284,6 @@ define intranet (
   $docroot              = '/sites/intranet/wuk',
   $serveraliases        = [],
 ) {
-    include intranet_db
   apache::vhost { $name:
     serveraliases               => $serveraliases,
     port                        => '80',
