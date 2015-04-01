@@ -1,0 +1,1 @@
+The puppet provisioner packaged with vagrant requires this directory to exist before the modules are downloaded.
