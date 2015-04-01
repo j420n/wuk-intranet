@@ -5,5 +5,7 @@ sudo::configs:
     'admins':
         'content'   : "%admins ALL=(ALL) NOPASSWD: ALL"
         'priority'  : 10
-beluga::apache_frontend_server::owner: co
-beluga::apache_frontend_server::group: co
+beluga::apache_frontend_server::owner: httpd
+beluga::apache_frontend_server::group: httpd
+mysql::server::root_password: ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAjf/o8mT/cBZrLH7vdKRusYT7UWtgfBqGOdWbkX+QZb3Joc99d0UWWGi7bSgCsMr3Q1/Orl2eBeV44DKXvWEmNSV0DmZXxQHQ2ORiwkTzv1qHg4L4Gvx7aF6UMMwzesnZJkIfpaza/gCRwluQisSL8Gy11bt2GgjqTOxcmk+BqGQlEamMBCxdGKtvjtaIJse3cKbKKOW7Ovhv6GQgxsOsY2awZhMPfgq/5cABEFGW5I5UWQxNxgi+YsKfV91hoLnQ287vfIW+LVYMzB895grr0ZQb54jegEHBwotHWM8Fp2PBhJ42BDJ2xT9IGuKgQyxQcZ/27OgEKx0sEo5vdDesjjA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBBBgc8x1W24/sLhEZiwGhXwgBBLPVGgvNYh6p/SIc0ExC8D]
+intranet_db::user_password: ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAjf/o8mT/cBZrLH7vdKRusYT7UWtgfBqGOdWbkX+QZb3Joc99d0UWWGi7bSgCsMr3Q1/Orl2eBeV44DKXvWEmNSV0DmZXxQHQ2ORiwkTzv1qHg4L4Gvx7aF6UMMwzesnZJkIfpaza/gCRwluQisSL8Gy11bt2GgjqTOxcmk+BqGQlEamMBCxdGKtvjtaIJse3cKbKKOW7Ovhv6GQgxsOsY2awZhMPfgq/5cABEFGW5I5UWQxNxgi+YsKfV91hoLnQ287vfIW+LVYMzB895grr0ZQb54jegEHBwotHWM8Fp2PBhJ42BDJ2xT9IGuKgQyxQcZ/27OgEKx0sEo5vdDesjjA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBBBgc8x1W24/sLhEZiwGhXwgBBLPVGgvNYh6p/SIc0ExC8D]
