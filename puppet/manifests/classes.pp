@@ -1,3 +1,7 @@
+#INCLUDE CLASSES DECLARED IN HIERADATA
+#Look at files in hieradata directory
+hiera_include("classes")
+
 class wuk_defaults{
   class {'all_defaults': }
   class {'wuk_groups': } ->

@@ -4,6 +4,7 @@
     - yaml
 
 :hierarchy:
+    - "%{::clientcert}"
     - "%{role}"
     - common
 
