@@ -73,6 +73,24 @@ class wuk_groups {
   }
 }
 
+class intranet_db {
+  mysql_user { ["intranet@%"]:
+    ensure => 'present',
+    password_hash => mysql_password($intranet_db::user_password),
+  }
+  mysql_grant { ["intranet@%"]:
+    ensure     => 'present',
+    options    => ['GRANT'],
+    privileges => ['ALL'],
+    table      => '*.*',
+    user       => ["intranet@%"],
+  }
+ mysql_database { 'standards':
+      ensure  => 'present',
+      charset => 'utf8',
+  }
+}
+
 # includes SSL-groupintranet.wolseley.com.conf AND /sites/conf/include/groupintranetv2.conf
 define groupintranet (
   $docroot,
@@ -266,6 +284,7 @@ define intranet (
   $docroot              = '/sites/intranet/wuk',
   $serveraliases        = [],
 ) {
+    include intranet_db
   apache::vhost { $name:
     serveraliases               => $serveraliases,
     port                        => '80',
