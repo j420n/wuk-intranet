@@ -443,3 +443,70 @@ define groupintranetv2(
   apache::vhost { "${name}.wolseley.co.uk":
   }
 }
+
+define webnode(
+  $group_ssl_intranet_hostname      ,
+  $group_ssl_intranet_docroot       ,
+  $group_ssl_intranet_serveradmin   ,
+  $group_ssl_intranet_serveraliases ,
+  $group_intranet_hostname          ,
+  $group_intranet_docroot           ,
+  $group_intranet_serveradmin       ,
+  $group_intranet_serveraliases     ,
+  $intranet2_hostname               ,
+  $intranet2_docroot                ,
+  $intranet2_serveraliases          ,
+  $intranet_hostname                ,
+  $intranet_docroot                 ,
+  $intranet_serveraliases           ,
+
+) {
+
+  include prod_defaults
+
+  class { 'apache':
+    mpm_module                  => 'prefork',
+  }
+
+  include apache::mod::rewrite
+  include apache::mod::passenger
+  include apache::mod::perl
+
+  class { 'php52': }
+
+  file { [ "/sites", "/sites/intranet", "/sites/intranet2" ]:
+    ensure                      => "directory",
+  }
+
+  groupintranet { "${group_ssl_intranet_hostname}":
+    ssl           => false, # THIS SHOULD BE TRUE TODO
+    docroot       => "${group_ssl_intranet_docroot}",
+    serveradmin   => "${group_ssl_intranet_serveradmin}",
+    serveraliases => "${group_ssl_intranet_serveraliases}"
+  }
+
+  groupintranet { "${group_intranet_hostname}":
+    ssl         => false,
+    docroot     => "${group_intranet_docroot}",
+    serveradmin => "${group_intranet_serveradmin}",
+  }
+
+  intranet2 { "${intranet2_hostname}" :
+    docroot       => "${intranet2_docroot}",
+    ssl           => false, # THIS SHOULD BE TRUE TODO
+    serveraliases => "${intranet2_serveraliases}",
+  }
+
+  intranet { "${intranet_hostname}":
+    serveraliases => "${intranet_serveraliases}",
+  }
+
+}
+
+class dbnode{
+
+  include prod_defaults
+  class {'beluga::mysql_server': }
+  class {'intranet_db':}
+
+}
