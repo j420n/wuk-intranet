@@ -52,3 +52,151 @@ node wuk-dev {
   }
 
 }
+
+# Intranet LinuxDev01
+node e03422 {
+
+  include prod_defaults
+
+  class { 'apache':
+    mpm_module                  => 'prefork',
+  }
+  include apache::mod::rewrite
+  include apache::mod::passenger
+  include apache::mod::perl
+  include apache::mod::php
+
+  class { 'php52': }
+
+  class {'beluga::mysql_server': }
+
+  include passenger
+
+  class { 'beluga::developer_tools':
+    install_grunt             => false,
+    install_git               => true,
+  }
+
+  class { 'jenkins':
+    configure_firewall        => false,
+  }
+
+}
+
+# Intranet LinuxStage01
+node e03423 {
+
+  include prod_defaults
+
+  class { 'apache':
+    mpm_module                  => 'prefork',
+  }
+  include apache::mod::rewrite
+  include apache::mod::passenger
+  include apache::mod::perl
+  include apache::mod::php
+
+  class { 'php52': }
+
+  include passenger
+
+}
+
+# Intranet LinuxStage02
+node e03424 {
+
+  include prod_defaults
+
+  class { 'apache':
+    mpm_module                  => 'prefork',
+  }
+  include apache::mod::rewrite
+  include apache::mod::passenger
+  include apache::mod::perl
+  include apache::mod::php
+
+  class { 'php52': }
+
+  include passenger
+
+}
+
+# Intranet LinuxIntranet01
+node e02414 {
+
+  include prod_defaults
+
+  class { 'apache':
+    mpm_module                  => 'prefork',
+  }
+  include apache::mod::rewrite
+  include apache::mod::passenger
+  include apache::mod::perl
+  include apache::mod::php
+
+  class { 'php52': }
+
+  include passenger
+
+}
+
+# Intranet LinuxIntranet02
+node e02415 {
+
+  include prod_defaults
+  class {'intranet';}
+
+  class { 'apache':
+    mpm_module                  => 'prefork',
+  }
+  include apache::mod::rewrite
+  include apache::mod::passenger
+  include apache::mod::perl
+  include apache::mod::php
+
+  class { 'php52': }
+
+  include passenger
+
+}
+
+# Intranet DB Prod 01
+node e02416 {
+
+  include prod_defaults
+
+  class {'beluga::mysql_server': }
+  class {'intranet_db':}
+
+}
+
+# Intranet DB Prod 02
+node e02417 {
+
+  include prod_defaults
+
+  class {'beluga::mysql_server': }
+  class {'intranet_db':}
+
+}
+
+# Intranet DB Dev/Test 01
+node e03425 {
+
+  include prod_defaults
+
+  class {'beluga::mysql_server': }
+  class {'intranet_db':}
+
+}
+
+# Intranet DB Dev/Test 02
+node e03426 {
+
+  include prod_defaults
+
+  class {'beluga::mysql_server': }
+  class {'intranet_db':}
+
+}
+
