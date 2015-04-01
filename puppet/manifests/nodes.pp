@@ -12,8 +12,8 @@ node wuk-dev {
   include apache::mod::rewrite
   include apache::mod::passenger
   include apache::mod::perl
+
   class { 'php52': }
-  include apache::mod::php
 
   file { [ "/sites", "/sites/intranet", "/sites/intranet2" ]:
     ensure                      => "directory",
@@ -61,16 +61,14 @@ node e03422 {
   class { 'apache':
     mpm_module                  => 'prefork',
   }
+
   include apache::mod::rewrite
   include apache::mod::passenger
   include apache::mod::perl
-  include apache::mod::php
 
   class { 'php52': }
 
   class {'beluga::mysql_server': }
-
-  include passenger
 
   class { 'beluga::developer_tools':
     install_grunt             => false,
@@ -79,6 +77,33 @@ node e03422 {
 
   class { 'jenkins':
     configure_firewall        => false,
+  }
+
+  file { [ "/sites", "/sites/intranet", "/sites/intranet2" ]:
+    ensure                      => "directory",
+  }
+
+  groupintranet { 'ssl-groupintranet.wolseley.com':
+    ssl           => false, # THIS SHOULD BE TRUE TODO
+    docroot       => '/sites/intranet/groupv2',
+    serveradmin   => 'it.ops@wolseley.co.uk',
+    serveraliases => ['groupintranet.wolseley.com']
+  }
+
+  groupintranet { 'groupintranet.wolseley.com':
+    ssl         => false,
+    docroot     => '/sites/intranet/groupv2',
+    serveradmin => 'web_admin_ripon@wolseley.co.uk',
+  }
+
+  intranet2 { 'intranet2.wolseley.co.uk':
+    docroot       => '/sites/intranet2/wuk',
+    ssl           => false, # THIS SHOULD BE TRUE TODO
+    serveraliases => ['intranet2.wolseley.co.uk']
+  }
+
+  intranet { 'intranet.wolseley.co.uk':
+    serveraliases => ['www.intranet.wolseley.co.uk'],
   }
 
 }
@@ -91,14 +116,40 @@ node e03423 {
   class { 'apache':
     mpm_module                  => 'prefork',
   }
+
   include apache::mod::rewrite
   include apache::mod::passenger
   include apache::mod::perl
-  include apache::mod::php
 
   class { 'php52': }
 
-  include passenger
+  file { [ "/sites", "/sites/intranet", "/sites/intranet2" ]:
+    ensure                      => "directory",
+  }
+
+  groupintranet { 'ssl-groupintranet.wolseley.com':
+    ssl           => false, # THIS SHOULD BE TRUE TODO
+    docroot       => '/sites/intranet/groupv2',
+    serveradmin   => 'it.ops@wolseley.co.uk',
+    serveraliases => ['groupintranet.wolseley.com']
+  }
+
+  groupintranet { 'groupintranet.wolseley.com':
+    ssl         => false,
+    docroot     => '/sites/intranet/groupv2',
+    serveradmin => 'web_admin_ripon@wolseley.co.uk',
+  }
+
+  intranet2 { 'intranet2.wolseley.co.uk':
+    docroot       => '/sites/intranet2/wuk',
+    ssl           => false, # THIS SHOULD BE TRUE TODO
+    serveraliases => ['intranet2.wolseley.co.uk']
+  }
+
+  intranet { 'intranet.wolseley.co.uk':
+    serveraliases => ['www.intranet.wolseley.co.uk'],
+  }
+
 
 }
 
@@ -110,14 +161,39 @@ node e03424 {
   class { 'apache':
     mpm_module                  => 'prefork',
   }
+
   include apache::mod::rewrite
   include apache::mod::passenger
   include apache::mod::perl
-  include apache::mod::php
 
   class { 'php52': }
 
-  include passenger
+  file { [ "/sites", "/sites/intranet", "/sites/intranet2" ]:
+    ensure                      => "directory",
+  }
+
+  groupintranet { 'ssl-groupintranet.wolseley.com':
+    ssl           => false, # THIS SHOULD BE TRUE TODO
+    docroot       => '/sites/intranet/groupv2',
+    serveradmin   => 'it.ops@wolseley.co.uk',
+    serveraliases => ['groupintranet.wolseley.com']
+  }
+
+  groupintranet { 'groupintranet.wolseley.com':
+    ssl         => false,
+    docroot     => '/sites/intranet/groupv2',
+    serveradmin => 'web_admin_ripon@wolseley.co.uk',
+  }
+
+  intranet2 { 'intranet2.wolseley.co.uk':
+    docroot       => '/sites/intranet2/wuk',
+    ssl           => false, # THIS SHOULD BE TRUE TODO
+    serveraliases => ['intranet2.wolseley.co.uk']
+  }
+
+  intranet { 'intranet.wolseley.co.uk':
+    serveraliases => ['www.intranet.wolseley.co.uk'],
+  }
 
 }
 
@@ -129,14 +205,39 @@ node e02414 {
   class { 'apache':
     mpm_module                  => 'prefork',
   }
+
   include apache::mod::rewrite
   include apache::mod::passenger
   include apache::mod::perl
-  include apache::mod::php
 
   class { 'php52': }
 
-  include passenger
+  file { [ "/sites", "/sites/intranet", "/sites/intranet2" ]:
+    ensure                      => "directory",
+  }
+
+  groupintranet { 'ssl-groupintranet.wolseley.com':
+    ssl           => false, # THIS SHOULD BE TRUE TODO
+    docroot       => '/sites/intranet/groupv2',
+    serveradmin   => 'it.ops@wolseley.co.uk',
+    serveraliases => ['groupintranet.wolseley.com']
+  }
+
+  groupintranet { 'groupintranet.wolseley.com':
+    ssl         => false,
+    docroot     => '/sites/intranet/groupv2',
+    serveradmin => 'web_admin_ripon@wolseley.co.uk',
+  }
+
+  intranet2 { 'intranet2.wolseley.co.uk':
+    docroot       => '/sites/intranet2/wuk',
+    ssl           => false, # THIS SHOULD BE TRUE TODO
+    serveraliases => ['intranet2.wolseley.co.uk']
+  }
+
+  intranet { 'intranet.wolseley.co.uk':
+    serveraliases => ['www.intranet.wolseley.co.uk'],
+  }
 
 }
 
@@ -144,19 +245,44 @@ node e02414 {
 node e02415 {
 
   include prod_defaults
-  class {'intranet';}
+  class {'intranet':}
 
   class { 'apache':
     mpm_module                  => 'prefork',
   }
+
   include apache::mod::rewrite
   include apache::mod::passenger
   include apache::mod::perl
-  include apache::mod::php
 
   class { 'php52': }
 
-  include passenger
+  file { [ "/sites", "/sites/intranet", "/sites/intranet2" ]:
+    ensure                      => "directory",
+  }
+
+  groupintranet { 'ssl-groupintranet.wolseley.com':
+    ssl           => false, # THIS SHOULD BE TRUE TODO
+    docroot       => '/sites/intranet/groupv2',
+    serveradmin   => 'it.ops@wolseley.co.uk',
+    serveraliases => ['groupintranet.wolseley.com']
+  }
+
+  groupintranet { 'groupintranet.wolseley.com':
+    ssl         => false,
+    docroot     => '/sites/intranet/groupv2',
+    serveradmin => 'web_admin_ripon@wolseley.co.uk',
+  }
+
+  intranet2 { 'intranet2.wolseley.co.uk':
+    docroot       => '/sites/intranet2/wuk',
+    ssl           => false, # THIS SHOULD BE TRUE TODO
+    serveraliases => ['intranet2.wolseley.co.uk']
+  }
+
+  intranet { 'intranet.wolseley.co.uk':
+    serveraliases => ['www.intranet.wolseley.co.uk'],
+  }
 
 }
 
