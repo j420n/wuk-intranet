@@ -102,5 +102,5 @@ mod 'SilexConsulting/rvm',
 mod 'puppetlabs-rpmbuilder',
     :git => 'https://github.com/puppetlabs/puppetlabs-rpmbuilder.git'
 
-mod 'php52',
+mod 'SilexConsulting/php52',
     :git => 'https://github.com/SilexConsulting/puppet-php52.git'
