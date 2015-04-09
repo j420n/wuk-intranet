@@ -155,6 +155,7 @@ define intranet2 (
     false => '80',
   }
   apache::vhost {$name:
+    manage_docroot              => false,
     serveraliases               => $serveraliases,
     port                        => $port,
     serveradmin                 => 'web_admin_ripon@wolseley.co.uk',
@@ -291,7 +292,7 @@ define intranet (
     port                        => '80',
     serveradmin                 => 'web_admin_ripon@wolseley.co.uk',
     docroot                     => $docroot,
-
+    manage_docroot              => false,
     redirect_status             => 'permanent',
     redirect_source             => '/testarena.html',
     redirect_dest               => "http://${intranet2}/testarena.html",
@@ -418,14 +419,15 @@ define intranet2DEMO(
   apache::vhost { "${name}.wolseley.co.uk":
     port                        => '80',
     docroot                     => $docroot,
+    manage_docroot              => false,
     override                    => 'All',
     php_values                  => ['max_execution_time 120'],
     directories                 => [
       {
         allow_override          => ['All'],
-        path                    => "${docroot}/wuk",
+        path                    => "${docroot}/current",
         options                 => ['FollowSymLinks', '-MultiViews'],
-       php_values              => ["include_path \"${docroot}/wuk\"", "include_path \"${docroot}/pip\""],
+       php_values              => ["include_path \"${docroot}/current\"", "include_path \"${docroot}/pip\""],
         custom_fragment         => 'RailsBaseURI /apps
 RailsBaseURI /qna
 zend.ze1_compatibility_mode Off',
@@ -484,7 +486,7 @@ define webnode(
   }
 
   intranet2 { "${prefix}intranet2.wolseley.co.uk" :
-    docroot       => '/sites/intranet2/wuk',
+    docroot       => '/sites/intranet2/current',
     ssl           => false, # THIS SHOULD BE TRUE TODO
     serveraliases => ["${prefix}.intranet2.wolseley.com"],
   }
