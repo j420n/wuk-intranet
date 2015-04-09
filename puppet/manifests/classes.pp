@@ -90,7 +90,7 @@ class intranet_db {
     table      => '*.*',
     user       => ["intranet@%"],
   }
- mysql_database { 'standards':
+ mysql_database { 'intranet2':
       ensure  => 'present',
       charset => 'utf8',
   }
