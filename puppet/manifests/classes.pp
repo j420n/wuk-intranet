@@ -164,15 +164,11 @@ define intranet2 (
         rewrite_rule            => ['^/(.*) http://www.bathstore.com/__admin$2 [R,L]'],
       },
       {
-        rewrite_cond            => ['%{HTTP_HOST} !^intranet2.wolseley.co.uk$ [NC]', '%{HTTP_HOST} !^$'],
-        rewrite_rule            => ['^/(.*) http://intranet2.wolseley.co.uk/$1 [R]']
+        rewrite_cond            => ["%{HTTP_HOST} !^${name}$ [NC]", '%{HTTP_HOST} !^$'],
+        rewrite_rule            => ["^/(.*) http://${name}/\$1 [R]"]
       },
       {
         rewrite_rule            => ['^/$ /index.php [L,R=301]']
-      },
-      {
-        rewrite_cond            => ['%{TIME_YEAR}%{TIME_MON}%{TIME_DAY} =20090119 [OR]','%{TIME_YEAR}%{TIME_MON}%{TIME_DAY} =20090224','%{TIME_HOUR}%{TIME_MIN} >0800','%{TIME_HOUR}%{TIME_MIN} <1200'],
-        rewrite_rule            => ['^/index.php http://live-qna.wolseley.co.uk [L,R=301]']
       },
       {
         rewrite_cond            => ['%{REQUEST_METHOD} ^TRAC(E|K)'],
@@ -467,6 +463,8 @@ define webnode(
 
   file { [ "/sites", "/sites/intranet", "/sites/intranet2" ]:
     ensure                      => "directory",
+    group                       => "apache",
+    owner                       => "jenkins",
   }
 
   groupintranet { "ssl-${prefix}groupintranet.wolseley.com":
