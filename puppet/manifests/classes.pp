@@ -468,6 +468,12 @@ define webnode(
     owner                       => "jenkins",
   }
 
+  file { [ "/sites", "/sites/rails", "/sites/rails/hashcms", "/sites/rails/qna", "/sites/rails/tree", "/sites/rails/wow" ]:
+    ensure                      => "directory",
+    group                       => "apache",
+    owner                       => "jenkins",
+  }
+
   groupintranet { "ssl-${prefix}groupintranet.wolseley.com":
     ssl           => false, # THIS SHOULD BE TRUE TODO
     docroot       => '/sites/intranet/groupv2',
