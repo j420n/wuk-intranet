@@ -29,6 +29,8 @@ node e03422 {
     prefix => 'dev.'
   }
 
+  include dbnode
+
   class { 'beluga::developer_tools':
     install_grunt             => false,
     install_git               => true,
