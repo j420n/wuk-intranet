@@ -16,6 +16,9 @@ node wuk-dev {
 
   class { 'jenkins':
     configure_firewall        => false,
+    config_hash => {
+      'HTTP_PORT' => { 'value' => '9090' }, 'AJP_PORT' => { 'value' => '9009' }
+    }
   }
 
 }
