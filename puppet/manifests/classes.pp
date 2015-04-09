@@ -462,13 +462,9 @@ define webnode(
 
   class { 'php52': }
 
-  file { [ "/sites", "/sites/intranet", "/sites/intranet2" ]:
-    ensure                      => "directory",
-    group                       => "apache",
-    owner                       => "jenkins",
-  }
+  $files = [ "/sites", "/sites/intranet", "/sites/intranet2", "/sites/rails", "/sites/rails/qna", "/sites/rails/apps" ]
 
-  file { [ "/sites", "/sites/rails", "/sites/rails/hashcms", "/sites/rails/qna", "/sites/rails/tree", "/sites/rails/wow" ]:
+  file { $files:
     ensure                      => "directory",
     group                       => "apache",
     owner                       => "jenkins",
