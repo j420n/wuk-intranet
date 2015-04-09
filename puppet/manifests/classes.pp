@@ -79,16 +79,17 @@ class wuk_groups {
 }
 
 class intranet_db {
-  mysql_user { ["intranet@%"]:
+  $db_pass = hiera("intranet_db::user_password", 'password')
+  mysql_user { ["intranet@localhost"]:
     ensure => 'present',
-    password_hash => mysql_password($intranet_db::user_password),
+    password_hash => mysql_password($db_pass),
   }
-  mysql_grant { ["intranet@%"]:
+  mysql_grant { ['intranet@localhost/intranet2']:
     ensure     => 'present',
     options    => ['GRANT'],
     privileges => ['ALL'],
     table      => '*.*',
-    user       => ["intranet@%"],
+    user       => ['intranet@localhost'],
   }
  mysql_database { 'intranet2':
       ensure  => 'present',
